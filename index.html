@@ -11,7 +11,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         #chat-window {
-            /* CAMINHO DA IMAGEM DE FUNDO ATUALIZADO ABAIXO */
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/background.jpg');
             background-size: cover;
             background-position: center;
@@ -20,7 +19,7 @@
         .hidden { display: none; }
         .mic-wrapper.recording button {
             transform: scale(1.2);
-            background-color: #A57E58; /* Tom terroso mais escuro */
+            background-color: #1d4ed8; /* Tom de azul mais escuro (blue-700) */
         }
     </style>
 </head>
@@ -28,9 +27,9 @@
 
     <div class="flex flex-col w-full max-w-2xl h-[90vh] bg-white rounded-2xl shadow-2xl m-4">
         <header class="bg-[#2d4a32] text-white p-4 rounded-t-2xl shadow-md flex items-center space-x-4">
-            <img src="images/avatar.jpg" alt="Avatar Sorocab.IA" class="h-16 w-16 rounded-full border-2 border-white object-cover">
+            <img src="images/avatar.png" alt="Avatar Sorocab.IA" class="h-16 w-16 rounded-full border-2 border-white object-cover">
             <div>
-                <h1 class="text-xl font-bold">Sorocaba - IA</h1>
+                <h1 class="text-xl font-bold">Sorocaba IA</h1>
                 <p class="text-sm text-gray-200">A voz da Manchester Paulista</p>
             </div>
         </header>
@@ -47,12 +46,12 @@
             <div class="flex items-center bg-gray-100 rounded-full p-2">
                 <input type="text" id="user-input" placeholder="O que cê qué sabê, mano?" class="flex-1 bg-transparent border-none focus:ring-0 text-gray-800 placeholder-gray-500 px-4">
                 
-                <button id="send-button" class="bg-[#2d4a32] hover:bg-green-800 text-white rounded-full p-2.5 transition-colors duration-300 ml-2 hidden">
+                <button id="send-button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 transition-colors duration-300 ml-2 hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
                 </button>
                 
                 <div class="mic-wrapper">
-                    <button id="mic-button" class="bg-[#A57E58] hover:bg-[#8e6b4d] text-white rounded-full p-2.5 transition-colors duration-300 ml-2">
+                    <button id="mic-button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 transition-colors duration-300 ml-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" /></svg>
                     </button>
                 </div>
