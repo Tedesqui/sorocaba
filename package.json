@@ -1,0 +1,10 @@
+{
+  "name": "sorocaba-ia",
+  "version": "1.0.0",
+  "description": "Chatbot com a persona da cidade de Sorocaba, a Manchester Paulista.",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
