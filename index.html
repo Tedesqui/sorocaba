@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sorocaba IA - Direto da Manchester Paulista</title>
+    <title>Sorocab.IA - Direto da Manchester Paulista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,11 @@
         .message-ai p, .message-user p { word-wrap: break-word; }
         .hidden { display: none; }
         
+        .mic-wrapper.recording button {
+            transform: scale(1.2);
+            background-color: #1d4ed8; /* Tom de azul mais escuro (blue-700) */
+        }
+
         /* Estilos para o Modal do Avatar */
         .modal {
             display: none;
@@ -193,6 +198,62 @@
             if (event.target == avatarModal) {
                 avatarModal.style.display = "none";
             }
+        }
+
+        // --- LÓGICA DE DETECÇÃO DE IOS (IPHONE/IPAD) ---
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        // --- LÓGICA DE RECONHECIMENTO DE VOZ (CORRIGIDA E CONDICIONAL) ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        // Só ativa o microfone se o navegador tiver suporte E não for um dispositivo iOS
+        if (SpeechRecognition && !isIOS) {
+            const recognition = new SpeechRecognition();
+            let recognitionActive = false;
+            recognition.lang = 'pt-BR';
+            recognition.interimResults = false;
+
+            const startRecognition = () => {
+                if (recognitionActive) return;
+                micWrapper.classList.add('recording');
+                recognition.start();
+                recognitionActive = true;
+            };
+
+            const stopRecognition = () => {
+                if (!recognitionActive) return;
+                micWrapper.classList.remove('recording');
+                recognition.stop();
+                recognitionActive = false;
+            };
+            
+            // Eventos para Desktop (mouse)
+            micButton.addEventListener('mousedown', startRecognition);
+            micButton.addEventListener('mouseup', stopRecognition);
+            
+            // Eventos para Mobile (toque)
+            micButton.addEventListener('touchstart', (e) => { e.preventDefault(); startRecognition(); });
+            micButton.addEventListener('touchend', (e) => { e.preventDefault(); stopRecognition(); });
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                sendMessage(transcript);
+            };
+
+            recognition.onspeechend = stopRecognition;
+
+            recognition.onerror = (event) => {
+                stopRecognition();
+                console.error('Erro no reconhecimento de voz:', event.error);
+                let errorMessage = 'Ocorreu um erro ao tentar te ouvir.';
+                if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                    errorMessage = 'Você precisa permitir o acesso ao microfone.';
+                }
+                appendMessage(errorMessage, 'ai');
+            };
+        } else {
+            // Se não tiver suporte ou for iOS, esconde o botão do microfone.
+            micWrapper.style.display = 'none';
         }
 
     </script>
