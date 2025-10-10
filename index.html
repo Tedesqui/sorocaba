@@ -18,9 +18,10 @@
         .message-ai p, .message-user p { word-wrap: break-word; }
         .hidden { display: none; }
         
+        /* --- ALTERADO: Botão agora dobra de tamanho --- */
         .mic-wrapper.recording button {
-            transform: scale(1.2);
-            background-color: #1d4ed8; /* Tom de azul mais escuro (blue-700) */
+            transform: scale(2); /* Aumentado de 1.2 para 2 */
+            background-color: #1d4ed8; 
         }
 
         /* Estilos para o Modal do Avatar */
@@ -89,7 +90,7 @@
                 </button>
                 
                 <div class="mic-wrapper">
-                    <button id="mic-button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 transition-colors duration-300 ml-2">
+                    <button id="mic-button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 transition duration-300 ease-in-out ml-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" /></svg>
                     </button>
                 </div>
@@ -242,7 +243,7 @@
             // Eventos para Mobile (toque)
             micButton.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                // --- NOVO: Adiciona a vibração ao tocar ---
+                // --- Vibração (só funciona em Android e se não estiver no modo silencioso) ---
                 if (navigator.vibrate) {
                     navigator.vibrate(100); // Vibra por 100 milissegundos
                 }
