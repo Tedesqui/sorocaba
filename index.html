@@ -240,7 +240,14 @@
             micButton.addEventListener('mouseup', stopRecognition);
             
             // Eventos para Mobile (toque)
-            micButton.addEventListener('touchstart', (e) => { e.preventDefault(); startRecognition(); });
+            micButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // --- NOVO: Adiciona a vibração ao tocar ---
+                if (navigator.vibrate) {
+                    navigator.vibrate(100); // Vibra por 100 milissegundos
+                }
+                startRecognition();
+            });
             micButton.addEventListener('touchend', (e) => { e.preventDefault(); stopRecognition(); });
 
             recognition.onresult = (event) => {
